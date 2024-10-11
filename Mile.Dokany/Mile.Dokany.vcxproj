@@ -20,16 +20,78 @@
   <Import Project="..\Mile.Project.Windows\Mile.Project.Platform.ARM64.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.Default.props" />
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.props" />
+  <PropertyGroup>
+    <IncludePath>$(MSBuildThisFileDirectory)Include\fuse\;$(MSBuildThisFileDirectory)Include\dokan\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>_EXPORTING;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
     <Link>
       <ModuleDefinitionFile>Mile.Dokany.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Mile.Dokany.def" />
+    <None Include="Source\ntstatus.i" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mile.Dokany.cpp" />
+    <ClCompile Include="Source\access.c" />
+    <ClCompile Include="Source\cleanup.c" />
+    <ClCompile Include="Source\close.c" />
+    <ClCompile Include="Source\create.c" />
+    <ClCompile Include="Source\directory.c" />
+    <ClCompile Include="Source\dokan.c" />
+    <ClCompile Include="Source\dokanfuse.cpp">
+      <DisableSpecificWarnings>4100;4505;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Source\dokannp.c" />
+    <ClCompile Include="Source\dokan_pool.c" />
+    <ClCompile Include="Source\dokan_vector.c" />
+    <ClCompile Include="Source\fileinfo.c" />
+    <ClCompile Include="Source\flush.c" />
+    <ClCompile Include="Source\fusemain.cpp">
+      <DisableSpecificWarnings>4100;4245;4457;4458;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Source\fuse_helpers.c">
+      <DisableSpecificWarnings>4100;4115;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Source\fuse_opt.c" />
+    <ClCompile Include="Source\lock.c" />
+    <ClCompile Include="Source\mount.c" />
+    <ClCompile Include="Source\ntstatus.c" />
+    <ClCompile Include="Source\read.c" />
+    <ClCompile Include="Source\security.c" />
+    <ClCompile Include="Source\setfile.c" />
+    <ClCompile Include="Source\timeout.c" />
+    <ClCompile Include="Source\utils.cpp">
+      <DisableSpecificWarnings>4018;</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="Source\version.c" />
+    <ClCompile Include="Source\volume.c" />
+    <ClCompile Include="Source\write.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\dokan\dokan.h" />
+    <ClInclude Include="Include\dokan\fileinfo.h" />
+    <ClInclude Include="Include\dokan\public.h" />
+    <ClInclude Include="Include\dokan\dokanc.h" />
+    <ClInclude Include="Include\fuse.h" />
+    <ClInclude Include="Include\fuse\fuse.h" />
+    <ClInclude Include="Include\fuse\fuse_common.h" />
+    <ClInclude Include="Include\fuse\fuse_opt.h" />
+    <ClInclude Include="Include\fuse\fuse_sem_fix.h" />
+    <ClInclude Include="Include\fuse\fuse_win.h" />
+    <ClInclude Include="Include\fuse\utils.h" />
+    <ClInclude Include="Source\dokanfuse.h" />
+    <ClInclude Include="Source\dokani.h" />
+    <ClInclude Include="Source\dokan_pool.h" />
+    <ClInclude Include="Source\dokan_vector.h" />
+    <ClInclude Include="Source\fusemain.h" />
+    <ClInclude Include="Source\list.h" />
+    <ClInclude Include="Source\resource.h" />
   </ItemGroup>
   <Import Project="..\Mile.Project.Windows\Mile.Project.Cpp.targets" />
 </Project>

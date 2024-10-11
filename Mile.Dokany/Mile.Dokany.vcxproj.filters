@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Mile.Dokany.cpp" />
+    <ClCompile Include="Source\dokan_pool.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dokan_vector.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fileinfo.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\flush.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\lock.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mount.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ntstatus.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\read.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\security.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\setfile.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\timeout.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\version.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\volume.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\write.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\access.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\cleanup.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\close.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\create.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\directory.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dokan.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dokanfuse.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fuse_helpers.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fuse_opt.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fusemain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\utils.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\dokannp.c">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mile.Dokany.def" />
+    <None Include="Source\ntstatus.i">
+      <Filter>Source</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{6e458892-097e-4a5d-bfb1-a244ebd9436d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\dokan">
+      <UniqueIdentifier>{67a6d150-07da-4f3d-b6ae-824c729414ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d0934b4d-7bf9-417d-93ed-eafd11694122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\fuse">
+      <UniqueIdentifier>{6bd82068-572e-47da-b4c2-c2adc6fa9752}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\dokan\fileinfo.h">
+      <Filter>Include\dokan</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\dokan\public.h">
+      <Filter>Include\dokan</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\dokan\dokan.h">
+      <Filter>Include\dokan</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dokan_pool.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dokan_vector.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dokani.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\list.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\resource.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\dokanfuse.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\fusemain.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\dokan\dokanc.h">
+      <Filter>Include\dokan</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\fuse_sem_fix.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\fuse_win.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\utils.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\fuse.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\fuse_common.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse\fuse_opt.h">
+      <Filter>Include\fuse</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\fuse.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
