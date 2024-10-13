@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  PROJECT:   Mouri Internal Library Essentials
+  FILE:      Mile.Dokany.nuspec
+  PURPOSE:   NuGet package definition for Mile.Dokany
+
+  LICENSE:   The MIT License
+
+  MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
+-->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mile.Dokany</id>
+    <version>$version$</version>
+    <description>The NuGet integration package version of Dokany</description>
+    <authors>Kenji Mouri</authors>
+    <projectUrl>https://github.com/ProjectMile/Mile.Dokany</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">License.md</license>
+    <readme>ReadMe.md</readme>
+    <repository type="git" url="https://github.com/ProjectMile/Mile.Dokany.git" />
+  </metadata>
+  <files>
+
+    <file src="..\Output\Binaries\Release\Win32\*.dll" target="build\native\Redist\x86"/>
+    <file src="..\Output\Binaries\Release\Win32\*.pdb" target="build\native\Redist\x86"/>
+    <file src="..\Output\Binaries\Release\Win32\*.lib" target="build\native\Lib\x86"/>
+
+    <file src="..\Output\Binaries\Release\x64\*.dll" target="build\native\Redist\x64"/>
+    <file src="..\Output\Binaries\Release\x64\*.pdb" target="build\native\Redist\x64"/>
+    <file src="..\Output\Binaries\Release\x64\*.lib" target="build\native\Lib\x64"/>
+
+    <file src="..\Output\Binaries\Release\ARM64\*.dll" target="build\native\Redist\ARM64"/>
+    <file src="..\Output\Binaries\Release\ARM64\*.pdb" target="build\native\Redist\ARM64"/>
+    <file src="..\Output\Binaries\Release\ARM64\*.lib" target="build\native\Lib\ARM64"/>
+
+    <file src="..\Mile.Dokany\Include\**\*.h" target="build\native\Include" />
+
+    <file src="Mile.Dokany.targets" target="build\native"/>
+
+    <file src="..\ReadMe.md" target="."/>
+    <file src="..\License.md" target="."/>
+    <file src="..\ReleaseNotes.md" target="."/>
+
+  </files>
+</package>
