@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -105,7 +105,6 @@ DokanSetDispositionInformation(PEVENT_CONTEXT EventContext,
     PFILE_DISPOSITION_INFORMATION_EX dispositionexInfo =
         (PFILE_DISPOSITION_INFORMATION_EX)(
             (PCHAR)EventContext + EventContext->Operation.SetFile.BufferOffset);
-
     DeleteFileFlag = (dispositionexInfo->Flags & FILE_DISPOSITION_DELETE) != 0;
   } break;
   default:
@@ -114,10 +113,6 @@ DokanSetDispositionInformation(PEVENT_CONTEXT EventContext,
 
   if (!DokanOperations->DeleteFile || !DokanOperations->DeleteDirectory)
     return STATUS_NOT_IMPLEMENTED;
-
-  if (DeleteFileFlag == FileInfo->DeleteOnClose) {
-    return STATUS_SUCCESS;
-  }
 
   if (DokanOperations->GetFileInformation && DeleteFileFlag) {
     BY_HANDLE_FILE_INFORMATION byHandleFileInfo;
@@ -130,7 +125,7 @@ DokanSetDispositionInformation(PEVENT_CONTEXT EventContext,
       return STATUS_CANNOT_DELETE;
   }
 
-  FileInfo->DeleteOnClose = DeleteFileFlag;
+  FileInfo->DeletePending = DeleteFileFlag;
 
   if (FileInfo->IsDirectory) {
     result = DokanOperations->DeleteDirectory(
@@ -139,8 +134,8 @@ DokanSetDispositionInformation(PEVENT_CONTEXT EventContext,
     result = DokanOperations->DeleteFile(EventContext->Operation.SetFile.FileName,
                                        FileInfo);
   }
-  //Double set for later be sure FS user did not changed it
-  FileInfo->DeleteOnClose = DeleteFileFlag;
+  // Double set for later be sure FS user did not changed it
+  FileInfo->DeletePending = DeleteFileFlag;
   return result;
 }
 
@@ -281,9 +276,10 @@ VOID DispatchSetInformation(PDOKAN_IO_EVENT IoEvent) {
   if (status == STATUS_SUCCESS) {
     if (fileInformationClass == FileDispositionInformation ||
         fileInformationClass == FileDispositionInformationEx) {
-      IoEvent->EventResult->Operation.Delete.DeleteOnClose =
-          IoEvent->DokanFileInfo.DeleteOnClose;
-      DbgPrint("  dispositionInfo->DeleteFile = %d\n", IoEvent->DokanFileInfo.DeleteOnClose);
+      IoEvent->EventResult->Operation.Delete.DeletePending =
+          IoEvent->DokanFileInfo.DeletePending;
+      DbgPrint("  dispositionInfo->DeletePending = %d\n",
+               IoEvent->DokanFileInfo.DeletePending);
     } else if (fileInformationClass == FileRenameInformation ||
                fileInformationClass == FileRenameInformationEx) {
       PDOKAN_RENAME_INFORMATION renameInfo =

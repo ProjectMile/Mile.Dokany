@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -35,6 +35,10 @@ VOID DispatchCleanup(PDOKAN_IO_EVENT IoEvent) {
            IoEvent->DokanOpenInfo != NULL ? IoEvent->DokanOpenInfo->EventId
                                           : -1,
            IoEvent);
+
+  if (IoEvent->EventContext->FileFlags & DOKAN_DELETE_ON_CLOSE) {
+    IoEvent->DokanFileInfo.DeletePending = 1;
+  }
 
   if (IoEvent->DokanInstance->DokanOperations->Cleanup) {
     // ignore return value

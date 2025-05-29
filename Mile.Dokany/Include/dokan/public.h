@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2017 - 2023 Google, Inc.
+  Copyright (C) 2017 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -105,6 +105,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 #define DOKAN_RETRY_CREATE 512
 #define DOKAN_EVER_USED_IN_NOTIFY_LIST 1024
 #define DOKAN_FILE_CHANGE_LAST_WRITE 2048
+#define DOKAN_FCB_STATE_DELETE_PENDING 4096
 
 // used in DOKAN_START->DeviceType
 #define DOKAN_DISK_FILE_SYSTEM 0
@@ -376,7 +377,7 @@ typedef struct _EVENT_INFORMATION {
       LARGE_INTEGER CurrentByteOffset;
     } Write;
     struct {
-      UCHAR DeleteOnClose;
+      UCHAR DeletePending;
     } Delete;
     struct {
       ULONG Timeout;

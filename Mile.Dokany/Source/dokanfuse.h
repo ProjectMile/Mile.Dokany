@@ -4,7 +4,7 @@
 #include <string>
 
 #define FUSE_THREAD_COUNT 10
-#define DOKAN_DLL L"Mile.Dokany.dll"
+#define DOKAN_DLL L"dokan" DOKAN_MAJOR_API_VERSION L".dll"
 
 // Cygwin64 is LP64 while Windows 64bit is LLP64.
 // This why we define macros in the style of inttypes.h for printing DWORDs and ULONGs which are fixed to 32 bit.

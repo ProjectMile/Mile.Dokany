@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -256,7 +256,7 @@ DWORD APIENTRY NPCancelConnection(__in LPWSTR Name, __in BOOL Force) {
 
   DbgPrintW(L"NpCancelConnection Disconnect was ignored\n");
 
-  return WN_NO_ERROR;
+  return WN_NOT_CONNECTED;
 }
 
 DWORD APIENTRY NPGetConnection(__in LPWSTR LocalName, __out LPWSTR RemoteName,

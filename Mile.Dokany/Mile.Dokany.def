@@ -116,7 +116,7 @@ errno_to_ntstatus_error
 convert_args
 free_converted_args
 
-; Utils 
+; Utils
 utf8_to_wchar_buf_old
 utf8_to_wchar_buf
 wchar_to_utf8_cstr

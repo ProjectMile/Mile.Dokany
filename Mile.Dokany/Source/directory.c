@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -620,6 +620,11 @@ VOID DispatchDirectoryInformation(PDOKAN_IO_EVENT IoEvent) {
 
   CheckFileName(IoEvent->EventContext->Operation.Directory.DirectoryName);
 
+  CreateDispatchCommon(IoEvent,
+                       IoEvent->EventContext->Operation.Directory.BufferLength,
+                       /*UseExtraMemoryPool=*/FALSE,
+                       /*ClearNonPoolBuffer=*/TRUE);
+
   // check whether this is handled FileInfoClass
   if (fileInfoClass != FileDirectoryInformation &&
       fileInfoClass != FileFullDirectoryInformation &&
@@ -637,11 +642,6 @@ VOID DispatchDirectoryInformation(PDOKAN_IO_EVENT IoEvent) {
     EventCompletion(IoEvent);
     return;
   }
-
-  CreateDispatchCommon(IoEvent,
-                       IoEvent->EventContext->Operation.Directory.BufferLength,
-                       /*UseExtraMemoryPool=*/FALSE,
-                       /*ClearNonPoolBuffer=*/TRUE);
 
   IoEvent->EventResult->Operation.Directory.Index =
       IoEvent->EventContext->Operation.Directory.FileIndex;

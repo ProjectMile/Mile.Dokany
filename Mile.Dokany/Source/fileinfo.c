@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -58,7 +58,6 @@ NTSTATUS
 DokanFillFileStandardInfo(PFILE_STANDARD_INFORMATION StandardInfo,
                           PBY_HANDLE_FILE_INFORMATION FileInfo,
                           PULONG RemainingLength,
-                          PDOKAN_FILE_INFO DokanFileInfo,
                           PDOKAN_INSTANCE DokanInstance) {
   if (*RemainingLength < sizeof(FILE_STANDARD_INFORMATION)) {
     return STATUS_BUFFER_OVERFLOW;
@@ -71,7 +70,6 @@ DokanFillFileStandardInfo(PFILE_STANDARD_INFORMATION StandardInfo,
   StandardInfo->EndOfFile.HighPart = FileInfo->nFileSizeHigh;
   StandardInfo->EndOfFile.LowPart = FileInfo->nFileSizeLow;
   StandardInfo->NumberOfLinks = FileInfo->nNumberOfLinks;
-  StandardInfo->DeletePending = DokanFileInfo->DeleteOnClose;
   StandardInfo->Directory = FALSE;
 
   if (FileInfo->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
@@ -122,7 +120,6 @@ NTSTATUS
 DokanFillFileAllInfo(PFILE_ALL_INFORMATION AllInfo,
                      PBY_HANDLE_FILE_INFORMATION FileInfo,
                      PULONG RemainingLength,
-                     PDOKAN_FILE_INFO DokanFileInfo,
                      PDOKAN_INSTANCE DokanInstance) {
   ULONG allRemainingLength = *RemainingLength;
 
@@ -135,7 +132,7 @@ DokanFillFileAllInfo(PFILE_ALL_INFORMATION AllInfo,
 
   // FileStandardInformation
   DokanFillFileStandardInfo(&AllInfo->StandardInformation, FileInfo,
-                            RemainingLength, DokanFileInfo, DokanInstance);
+                            RemainingLength, DokanInstance);
 
   // FileInternalInformation
   DokanFillInternalInfo(&AllInfo->InternalInformation, FileInfo,
@@ -352,15 +349,14 @@ VOID DOKANAPI DokanEndDispatchGetFileInformation(
       DbgPrint("\tFileStandardInformation\n");
       Status = DokanFillFileStandardInfo(
           (PFILE_STANDARD_INFORMATION)IoEvent->EventResult->Buffer,
-          ByHandleFileInfo, &remainingLength, &IoEvent->DokanFileInfo,
-          IoEvent->DokanInstance);
+          ByHandleFileInfo, &remainingLength, IoEvent->DokanInstance);
       break;
 
     case FileAllInformation:
       DbgPrint("\tFileAllInformation\n");
       Status = DokanFillFileAllInfo(
           (PFILE_ALL_INFORMATION)IoEvent->EventResult->Buffer, ByHandleFileInfo,
-          &remainingLength, &IoEvent->DokanFileInfo, IoEvent->DokanInstance);
+          &remainingLength, IoEvent->DokanInstance);
       break;
 
     case FileAlternateNameInformation:

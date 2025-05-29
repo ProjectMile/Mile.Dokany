@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -305,8 +305,8 @@ BOOL DOKANAPI DokanUnmount(WCHAR DriveLetter) {
   L"\\Device\\DokanRedirector" DOKAN_MAJOR_API_VERSION
 #define DOKAN_NP_NAME L"Dokan" DOKAN_MAJOR_API_VERSION
 #define DOKAN_NP_PATH                                                          \
-  L"%SystemRoot%\\System32\\Mile.Dokany.dll"
-#define DOKAN_BINARY_NAME L"Mile.Dokany.dll"
+  L"%SystemRoot%\\System32\\dokannp" DOKAN_MAJOR_API_VERSION L".dll"
+#define DOKAN_BINARY_NAME L"dokannp" DOKAN_MAJOR_API_VERSION L".dll"
 #define DOKAN_NP_ORDER_KEY                                                     \
   L"System\\CurrentControlSet\\Control\\NetworkProvider\\Order"
 
@@ -343,7 +343,7 @@ BOOL DOKANAPI DokanNetworkProviderInstall() {
                    &key) != ERROR_SUCCESS) {
     return FALSE;
   }
-
+  
 
   if (RegQueryValueEx(key, L"ProviderOrder", 0, &type, (BYTE *)&buffer,
                       &buffer_size) != ERROR_SUCCESS) {

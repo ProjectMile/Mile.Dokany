@@ -1,7 +1,7 @@
 ﻿/*
   Dokan : user-mode file system library for Windows
 
-  Copyright (C) 2020 - 2023 Google, Inc.
+  Copyright (C) 2020 - 2025 Google, Inc.
   Copyright (C) 2015 - 2019 Adrien J. <liryna.stark@gmail.com> and Maxime C. <maxime@islog.com>
   Copyright (C) 2007 - 2011 Hiroki Asakawa <info@dokan-dev.net>
 
@@ -279,9 +279,6 @@ VOID SetupIOEventForProcessing(PDOKAN_IO_EVENT IoEvent) {
   IoEvent->DokanFileInfo.IsDirectory =
       (UCHAR)IoEvent->DokanOpenInfo->IsDirectory;
 
-  if (IoEvent->EventContext->FileFlags & DOKAN_DELETE_ON_CLOSE) {
-    IoEvent->DokanFileInfo.DeleteOnClose = 1;
-  }
   if (IoEvent->EventContext->FileFlags & DOKAN_PAGING_IO) {
     IoEvent->DokanFileInfo.PagingIo = 1;
   }
@@ -296,55 +293,62 @@ VOID SetupIOEventForProcessing(PDOKAN_IO_EVENT IoEvent) {
   }
 }
 
-VOID DispatchEvent(PDOKAN_IO_EVENT ioEvent) {
-  SetupIOEventForProcessing(ioEvent);
-  switch (ioEvent->EventContext->MajorFunction) {
+VOID HandleUnknownEvent(PDOKAN_IO_EVENT IoEvent) {
+  DokanDbgPrintW(L"Dokan Warning: Unsupported IRP 0x%x, event Info = 0x%p.\n",
+                 IoEvent->EventContext->MajorFunction, IoEvent->EventContext);
+  CreateDispatchCommon(IoEvent, 0, /*UseExtraMemoryPool=*/FALSE,
+                       /*ClearNonPoolBuffer=*/TRUE);
+  IoEvent->EventResult->Status = STATUS_INVALID_PARAMETER;
+  EventCompletion(IoEvent);
+}
+
+VOID DispatchEvent(PDOKAN_IO_EVENT IoEvent) {
+  SetupIOEventForProcessing(IoEvent);
+  switch (IoEvent->EventContext->MajorFunction) {
   case IRP_MJ_CREATE:
-    DispatchCreate(ioEvent);
+    DispatchCreate(IoEvent);
     break;
   case IRP_MJ_CLEANUP:
-    DispatchCleanup(ioEvent);
+    DispatchCleanup(IoEvent);
     break;
   case IRP_MJ_CLOSE:
-    DispatchClose(ioEvent);
+    DispatchClose(IoEvent);
     break;
   case IRP_MJ_DIRECTORY_CONTROL:
-    DispatchDirectoryInformation(ioEvent);
+    DispatchDirectoryInformation(IoEvent);
     break;
   case IRP_MJ_READ:
-    DispatchRead(ioEvent);
+    DispatchRead(IoEvent);
     break;
   case IRP_MJ_WRITE:
-    DispatchWrite(ioEvent);
+    DispatchWrite(IoEvent);
     break;
   case IRP_MJ_QUERY_INFORMATION:
-    DispatchQueryInformation(ioEvent);
+    DispatchQueryInformation(IoEvent);
     break;
   case IRP_MJ_QUERY_VOLUME_INFORMATION:
-    DispatchQueryVolumeInformation(ioEvent);
+    DispatchQueryVolumeInformation(IoEvent);
     break;
   case IRP_MJ_LOCK_CONTROL:
-    DispatchLock(ioEvent);
+    DispatchLock(IoEvent);
     break;
   case IRP_MJ_SET_INFORMATION:
-    DispatchSetInformation(ioEvent);
+    DispatchSetInformation(IoEvent);
     break;
   case IRP_MJ_FLUSH_BUFFERS:
-    DispatchFlush(ioEvent);
+    DispatchFlush(IoEvent);
     break;
   case IRP_MJ_QUERY_SECURITY:
-    DispatchQuerySecurity(ioEvent);
+    DispatchQuerySecurity(IoEvent);
     break;
   case IRP_MJ_SET_SECURITY:
-    DispatchSetSecurity(ioEvent);
+    DispatchSetSecurity(IoEvent);
     break;
   case DOKAN_IRP_LOG_MESSAGE:
-    DispatchDriverLogs(ioEvent);
+    DispatchDriverLogs(IoEvent);
     break;
   default:
-    DokanDbgPrintW(L"Dokan Warning: Unsupported IRP 0x%x, event Info = 0x%p.\n",
-                   ioEvent->EventContext->MajorFunction, ioEvent->EventContext);
-    PushIoEventBuffer(ioEvent);
+    HandleUnknownEvent(IoEvent);
     break;
   }
 }
@@ -1159,7 +1163,7 @@ int DokanStart(_In_ PDOKAN_INSTANCE DokanInstance) {
                     eventStart.MountPoint);
       return DOKAN_MOUNT_ERROR;
     }
-    DokanDbgPrint("Dokan Error: driver start error\n");    
+    DokanDbgPrint("Dokan Error: driver start error\n");
     return DOKAN_START_ERROR;
   } else if (driverInfo.Status == DOKAN_MOUNTED) {
     DokanInstance->MountId = driverInfo.MountId;
