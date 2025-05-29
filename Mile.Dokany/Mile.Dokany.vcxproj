@@ -4,7 +4,8 @@
     <ProjectGuid>{CE2836DE-CF6B-4AF0-8D10-9C197DF47F93}</ProjectGuid>
     <RootNamespace>Mile.Dokany</RootNamespace>
     <MileProjectType>DynamicLibrary</MileProjectType>
-    <MileProjectEnableVCLTLSupport>true</MileProjectEnableVCLTLSupport>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <MileUniCrtDisableRuntimeDebuggingFeature>true</MileUniCrtDisableRuntimeDebuggingFeature>
     <MileProjectUseProjectProperties>true</MileProjectUseProjectProperties>
     <MileProjectCompanyName>Project Mile</MileProjectCompanyName>
     <MileProjectFileDescription>Mile.Dokany</MileProjectFileDescription>
@@ -31,6 +32,12 @@
     <Link>
       <ModuleDefinitionFile>Mile.Dokany.def</ModuleDefinitionFile>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Debug'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)' == 'Release'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Mile.Dokany.def" />
@@ -92,6 +99,11 @@
     <ClInclude Include="Source\fusemain.h" />
     <ClInclude Include="Source\list.h" />
     <ClInclude Include="Source\resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Mile.Windows.UniCrt">
+      <Version>1.2.410</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1622" Project="Mile.Project.Cpp.targets" />
 </Project>
