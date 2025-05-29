@@ -9,7 +9,7 @@ The NuGet integration package version of [Dokany].
 ## Features
 
 - Inherited all features provided in the official Windows binaries from Dokany
-  2.2.0.1000.
+  2.3.0.1000.
 - Use [Mile.Windows.UniCrt](https://github.com/ProjectMile/Mile.Windows.UniCrt)
   toolchain to make the binary size smaller.
 
