@@ -1,9 +1,9 @@
 ﻿@rem 
-@rem PROJECT:   Mouri Internal Library Essentials
-@rem FILE:      Install.cmd
-@rem PURPOSE:   Mile.Dokany.Driver Installer
+@rem PROJECT:    Mouri Internal Library Essentials
+@rem FILE:       Install.cmd
+@rem PURPOSE:    Mile.Dokany.Driver Installer
 @rem 
-@rem LICENSE:   The MIT License
+@rem LICENSE:    The MIT License
 @rem 
 @rem MAINTAINER: MouriNaruto (Kenji.Mouri@outlook.com)
 @rem 
