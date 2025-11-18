@@ -3,7 +3,7 @@
   DefaultTargets="Restore;Build;Packaging"
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SolutionPath>$(MSBuildThisFileDirectory)Mile.Dokany.sln</SolutionPath>
+    <SolutionPath>$(MSBuildThisFileDirectory)Mile.Dokany.slnx</SolutionPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="$(SolutionPath)">
