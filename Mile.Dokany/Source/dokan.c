@@ -1301,6 +1301,8 @@ VOID DOKANAPI DokanReleaseMountPointList(PDOKAN_MOUNT_POINT_INFO list) {
   free(list);
 }
 
+// **************** Mile.Dokany Modification Start ****************
+#if 0 // ******** Annotated Dokany Mainline Source Code snippet Start ********
 BOOL WINAPI DllMain(HINSTANCE Instance, DWORD Reason, LPVOID Reserved) {
   UNREFERENCED_PARAMETER(Reserved);
   UNREFERENCED_PARAMETER(Instance);
@@ -1317,6 +1319,8 @@ BOOL WINAPI DllMain(HINSTANCE Instance, DWORD Reason, LPVOID Reserved) {
   }
   return TRUE;
 }
+#endif // ******** Annotated Dokany Mainline Source Code snippet End ********
+// **************** Mile.Dokany Modification End ****************
 
 VOID DOKANAPI DokanMapKernelToUserCreateFileFlags(
     ACCESS_MASK DesiredAccess, ULONG FileAttributes, ULONG CreateOptions,
