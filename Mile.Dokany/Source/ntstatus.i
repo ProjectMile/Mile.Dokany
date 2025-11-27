@@ -1,4 +1,4 @@
-case EPT_S_CANT_CREATE:                       return EPT_NT_CANT_CREATE;
+﻿case EPT_S_CANT_CREATE:                       return EPT_NT_CANT_CREATE;
 case EPT_S_CANT_PERFORM_OP:                   return EPT_NT_CANT_PERFORM_OP;
 case EPT_S_INVALID_ENTRY:                     return EPT_NT_INVALID_ENTRY;
 case EPT_S_NOT_REGISTERED:                    return EPT_NT_NOT_REGISTERED;

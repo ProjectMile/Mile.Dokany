@@ -24,6 +24,19 @@
 
 HINSTANCE hFuseDllInstance;
 
+// **************** Mile.Dokany Modification Start ****************
+#if 0 // ******** Annotated Dokany Mainline Source Code snippet Start ********
+extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason,
+                               LPVOID lpReserved) {
+  if (dwReason == DLL_PROCESS_ATTACH) {
+    hFuseDllInstance = hInstance;
+    DisableThreadLibraryCalls(hInstance);
+  }
+  return TRUE;
+}
+#endif // ******** Annotated Dokany Mainline Source Code snippet End ********
+// **************** Mile.Dokany Modification End ****************
+
 static int WalkDirectoryWithSetFuseContext(PDOKAN_FILE_INFO DokanFileInfo, void *buf, const char *name,
     const struct FUSE_STAT *stbuf,
     FUSE_OFF_T off)

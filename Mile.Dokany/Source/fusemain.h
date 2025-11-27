@@ -156,20 +156,20 @@ public:
 	int read_file(LPCWSTR file_name, LPVOID buffer, DWORD num_bytes_to_read,
 		LPDWORD	read_bytes, LONGLONG offset, PDOKAN_FILE_INFO dokan_file_info);
 
-	int write_file(LPCWSTR file_name, LPCVOID buffer,
-		DWORD num_bytes_to_write,LPDWORD num_bytes_written,
+	int write_file(LPCWSTR file_name, LPCVOID buffer, 
+		DWORD num_bytes_to_write,LPDWORD num_bytes_written, 
 		LONGLONG offset, PDOKAN_FILE_INFO dokan_file_info);
 
-	int flush_file_buffers(LPCWSTR file_name,
+	int flush_file_buffers(LPCWSTR file_name, 
 		PDOKAN_FILE_INFO dokan_file_info);
 
 	int get_file_information(LPCWSTR file_name,
-		LPBY_HANDLE_FILE_INFORMATION handle_file_information,
+		LPBY_HANDLE_FILE_INFORMATION handle_file_information, 
 		PDOKAN_FILE_INFO dokan_file_info);
 
 	int delete_file(LPCWSTR file_name, PDOKAN_FILE_INFO dokan_file_info);
 
-	int move_file(LPCWSTR file_name, LPCWSTR new_file_name,
+	int move_file(LPCWSTR file_name, LPCWSTR new_file_name, 
 		BOOL replace_existing, PDOKAN_FILE_INFO dokan_file_info);
 
 	int lock_file(LPCWSTR file_name, LONGLONG byte_offset, LONGLONG length,
@@ -178,10 +178,10 @@ public:
 	int unlock_file(LPCWSTR file_name, LONGLONG byte_offset, LONGLONG length,
 		PDOKAN_FILE_INFO dokan_file_info);
 
-	int set_end_of_file(LPCWSTR	file_name, LONGLONG byte_offset,
+	int set_end_of_file(LPCWSTR	file_name, LONGLONG byte_offset, 
 		PDOKAN_FILE_INFO dokan_file_info);
 
-	int set_file_attributes(LPCWSTR	file_name, DWORD file_attributes,
+	int set_file_attributes(LPCWSTR	file_name, DWORD file_attributes, 
 		PDOKAN_FILE_INFO dokan_file_info);
 
 	int helper_set_time_struct(const FILETIME* filetime, const time_t backup,
@@ -191,12 +191,12 @@ public:
 		const FILETIME* last_access_time, const FILETIME* last_write_time,
 		PDOKAN_FILE_INFO dokan_file_info);
 
-	int get_disk_free_space(PULONGLONG free_bytes_available,
+	int get_disk_free_space(PULONGLONG free_bytes_available, 
 		PULONGLONG number_of_bytes, PULONGLONG number_of_free_bytes,
 		PDOKAN_FILE_INFO dokan_file_info);
 
 	int get_volume_information(LPWSTR volume_name_buffer,DWORD volume_name_size,
-		LPWSTR file_system_name_buffer, DWORD file_system_name_size,
+		LPWSTR file_system_name_buffer, DWORD file_system_name_size, 
 		PDOKAN_FILE_INFO dokan_file_info, LPDWORD volume_flags);
 
 	int mounted(PDOKAN_FILE_INFO DokanFileInfo);
@@ -228,7 +228,7 @@ public:
 
 
 class impl_file_handle
-{
+{	
 	friend class impl_file_lock;
 	friend class impl_file_locks;
 	bool is_dir_;

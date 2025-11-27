@@ -347,7 +347,7 @@ BOOL DOKANAPI DokanNetworkProviderInstall() {
                    &key) != ERROR_SUCCESS) {
     return FALSE;
   }
-
+  
 
   if (RegQueryValueEx(key, L"ProviderOrder", 0, &type, (BYTE *)&buffer,
                       &buffer_size) != ERROR_SUCCESS) {
