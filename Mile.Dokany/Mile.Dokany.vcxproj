@@ -19,8 +19,12 @@
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x86.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.x64.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64.props" />
+  <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Platform.ARM64EC.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.Default.props" />
   <Import Sdk="Mile.Project.Configurations" Version="1.0.1827" Project="Mile.Project.Cpp.props" />
+  <PropertyGroup Condition="'$(Platform)'=='ARM64'">
+    <BuildAsX>true</BuildAsX>
+  </PropertyGroup>
   <PropertyGroup>
     <IncludePath>$(MSBuildThisFileDirectory)Include\fuse\;$(MSBuildThisFileDirectory)Include\dokan\;$(IncludePath)</IncludePath>
   </PropertyGroup>

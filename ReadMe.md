@@ -12,6 +12,7 @@ The NuGet integration package version of [Dokany].
   2.3.1.1000.
 - Use [Mile.Windows.UniCrt](https://github.com/ProjectMile/Mile.Windows.UniCrt)
   toolchain to make the binary size smaller.
+- Provide ARM64X and ARM64EC modes support for ARM64 targets.
 
 ## System Requirements
 
